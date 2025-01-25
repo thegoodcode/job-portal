@@ -4,11 +4,14 @@ import { notFound } from 'next/navigation'
 import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 
-export default async function JobPage({
-	params
-}: Readonly<{
-	params: { id: string }
-}>) {
+interface PageProps {
+	params: {
+		id: string
+	}
+	searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export default function JobPage({ params }: PageProps) {
 	const { id } = params
 	const job = jobs.find(job => job.id === id)
 
@@ -22,8 +25,7 @@ export default async function JobPage({
 				<div className='mb-6'>
 					<Link
 						href='/'
-						className='inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors'
-					>
+						className='inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors'>
 						<ArrowLeft className='w-5 h-5' />
 						<span>Back to Jobs</span>
 					</Link>
