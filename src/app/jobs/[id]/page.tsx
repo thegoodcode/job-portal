@@ -8,7 +8,11 @@ type PageProps = {
 	searchParams: Record<string, string | string[] | undefined>
 }
 
-export default async function JobPage({ searchParams: { id } }: PageProps) {
+export default function JobPage({ searchParams }: PageProps) {
+	const id = Array.isArray(searchParams.id)
+		? searchParams.id[0]
+		: searchParams.id
+
 	const job = jobs.find(job => job.id === id)
 
 	if (!job) {
