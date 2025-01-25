@@ -5,12 +5,10 @@ import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 
 type PageProps = {
-	params: { id: string }
 	searchParams: Record<string, string | string[] | undefined>
 }
 
-export default async function JobPage({ params }: PageProps) {
-	const { id } = params
+export default async function JobPage({ searchParams: { id } }: PageProps) {
 	const job = jobs.find(job => job.id === id)
 
 	if (!job) {
