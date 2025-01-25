@@ -4,14 +4,12 @@ import { notFound } from 'next/navigation'
 import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 
-interface PageProps {
-	params: {
-		id: string
-	}
-	searchParams: { [key: string]: string | string[] | undefined }
+type PageProps = {
+	params: { id: string }
+	searchParams: Record<string, string | string[] | undefined>
 }
 
-export default function JobPage({ params }: PageProps) {
+export default async function JobPage({ params }: PageProps) {
 	const { id } = params
 	const job = jobs.find(job => job.id === id)
 
