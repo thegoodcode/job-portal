@@ -5,13 +5,12 @@ import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 
 type PageProps = {
-	searchParams: Record<string, string | string[] | undefined>
+	searchParams: Promise<Record<string, string | string[] | undefined>>
 }
 
-export default function JobPage({ searchParams }: PageProps) {
-	const id = Array.isArray(searchParams.id)
-		? searchParams.id[0]
-		: searchParams.id
+export default async function JobPage({ searchParams }: PageProps) {
+	const params = await searchParams
+	const id = Array.isArray(params.id) ? params.id[0] : params.id
 
 	const job = jobs.find(job => job.id === id)
 
